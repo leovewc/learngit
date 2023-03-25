@@ -1,2 +1,217 @@
-abcdefghijklmn
-opq
+李坤@LAPTOP-7FRE54VI MINGW64 ~
+$  git config --global user.name"leo li"
+error: invalid key: user.nameleo li
+
+李坤@LAPTOP-7FRE54VI MINGW64 ~
+$ mkdir learngit
+
+李坤@LAPTOP-7FRE54VI MINGW64 ~
+$ cd learngit
+
+李坤@LAPTOP-7FRE54VI MINGW64 ~/learngit
+$ pwd
+/c/Users/李坤/learngit
+
+李坤@LAPTOP-7FRE54VI MINGW64 ~/learngit
+$ git init
+Initialized empty Git repository in C:/Users/李坤/learngit/.git/
+
+李坤@LAPTOP-7FRE54VI MINGW64 ~/learngit (master)
+$ ls -ah
+./  ../  .git/
+
+李坤@LAPTOP-7FRE54VI MINGW64 ~/learngit (master)
+$ git config --global user.email "2209523@xmum.edu.my"
+
+李坤@LAPTOP-7FRE54VI MINGW64 ~/learngit (master)
+$ git config --global user.name "leo li"
+
+李坤@LAPTOP-7FRE54VI MINGW64 ~/learngit (master)
+$ git add first learn.txt
+fatal: pathspec 'first' did not match any files
+
+李坤@LAPTOP-7FRE54VI MINGW64 ~/learngit (master)
+$ git add first_learn.txt
+fatal: pathspec 'first_learn.txt' did not match any files
+
+李坤@LAPTOP-7FRE54VI MINGW64 ~/learngit (master)
+$ git add ^[[200~"C:\Users\李坤\learngit\first learn"~
+fatal: pathspec '?[200~C:\Users\李坤\learngit\first learn~' did not match any files
+
+李坤@LAPTOP-7FRE54VI MINGW64 ~/learngit (master)
+$ git add first learn .txt
+fatal: pathspec 'first' did not match any files
+
+李坤@LAPTOP-7FRE54VI MINGW64 ~/learngit (master)
+$ git add first_learn.txt
+fatal: pathspec 'first_learn.txt' did not match any files
+
+李坤@LAPTOP-7FRE54VI MINGW64 ~/learngit (master)
+$ git add first_learn.txt
+fatal: pathspec 'first_learn.txt' did not match any files
+
+李坤@LAPTOP-7FRE54VI MINGW64 ~/learngit (master)
+$ git add firstLearn.txt
+fatal: pathspec 'firstLearn.txt' did not match any files
+
+李坤@LAPTOP-7FRE54VI MINGW64 ~/learngit (master)
+$ git add firstLearn.txt
+
+李坤@LAPTOP-7FRE54VI MINGW64 ~/learngit (master)
+$ git commit -m"wrote a first file"
+[master (root-commit) 4d8bcc1] wrote a first file
+ 2 files changed, 2 insertions(+)
+ create mode 100644 first learn
+ create mode 100644 firstLearn.txt
+
+李坤@LAPTOP-7FRE54VI MINGW64 ~/learngit (master)
+$ git status
+On branch master
+Changes not staged for commit:
+  (use "git add/rm <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        deleted:    first learn
+        modified:   firstLearn.txt
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        "\346\226\260\345\273\272 \346\226\207\346\234\254\346\226\207\346\241\243.txt"
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+李坤@LAPTOP-7FRE54VI MINGW64 ~/learngit (master)
+$ git diff firstLearn.txt
+diff --git a/firstLearn.txt b/firstLearn.txt
+index 1e72a6b..6764fed 100644
+--- a/firstLearn.txt
++++ b/firstLearn.txt
+@@ -1 +1 @@
+-abcdefghi
+\ No newline at end of file
++abcdefghijklmn
+\ No newline at end of file
+
+李坤@LAPTOP-7FRE54VI MINGW64 ~/learngit (master)
+$ git add firstLearn.txt
+
+李坤@LAPTOP-7FRE54VI MINGW64 ~/learngit (master)
+$ git status
+On branch master
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+        modified:   firstLearn.txt
+
+Changes not staged for commit:
+  (use "git add/rm <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        deleted:    first learn
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        "\346\226\260\345\273\272 \346\226\207\346\234\254\346\226\207\346\241\243.txt"
+
+
+李坤@LAPTOP-7FRE54VI MINGW64 ~/learngit (master)
+$ git commit -m"add jklmn"
+[master 456ac77] add jklmn
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+李坤@LAPTOP-7FRE54VI MINGW64 ~/learngit (master)
+$ git status
+On branch master
+Changes not staged for commit:
+  (use "git add/rm <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        deleted:    first learn
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        "\346\226\260\345\273\272 \346\226\207\346\234\254\346\226\207\346\241\243.txt"
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+李坤@LAPTOP-7FRE54VI MINGW64 ~/learngit (master)
+$ git add firstLearn.txt
+
+李坤@LAPTOP-7FRE54VI MINGW64 ~/learngit (master)
+$ git commit -m"add opq"
+[master 4346eaf] add opq
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+李坤@LAPTOP-7FRE54VI MINGW64 ~/learngit (master)
+$ git log
+commit 4346eafca2f005987ab2cdba9b5f34a1d48e80ee (HEAD -> master)
+Author: leo li <2209523@xmum.edu.my>
+Date:   Sat Mar 25 16:40:15 2023 +0800
+
+    add opq
+
+commit 456ac77f93ac33a596045d49593af0329e8b6b18
+Author: leo li <2209523@xmum.edu.my>
+Date:   Sat Mar 25 16:38:26 2023 +0800
+
+    add jklmn
+
+commit 4d8bcc1db9a812bebcdb97b92557f3af1e00db41
+Author: leo li <2209523@xmum.edu.my>
+Date:   Sat Mar 25 16:34:04 2023 +0800
+
+    wrote a first file
+
+李坤@LAPTOP-7FRE54VI MINGW64 ~/learngit (master)
+$ git log --pretty=oneline
+4346eafca2f005987ab2cdba9b5f34a1d48e80ee (HEAD -> master) add opq
+456ac77f93ac33a596045d49593af0329e8b6b18 add jklmn
+4d8bcc1db9a812bebcdb97b92557f3af1e00db41 wrote a first file
+
+李坤@LAPTOP-7FRE54VI MINGW64 ~/learngit (master)
+$ git reset --hard HEAD^
+HEAD is now at 456ac77 add jklmn
+
+李坤@LAPTOP-7FRE54VI MINGW64 ~/learngit (master)
+$ git reset --hard HEAD
+HEAD is now at 456ac77 add jklmn
+
+李坤@LAPTOP-7FRE54VI MINGW64 ~/learngit (master)
+$ git reset --hard 4346e
+HEAD is now at 4346eaf add opq
+
+李坤@LAPTOP-7FRE54VI MINGW64 ~/learngit (master)
+$ git log
+commit 4346eafca2f005987ab2cdba9b5f34a1d48e80ee (HEAD -> master)
+Author: leo li <2209523@xmum.edu.my>
+Date:   Sat Mar 25 16:40:15 2023 +0800
+
+    add opq
+
+commit 456ac77f93ac33a596045d49593af0329e8b6b18
+Author: leo li <2209523@xmum.edu.my>
+Date:   Sat Mar 25 16:38:26 2023 +0800
+
+    add jklmn
+
+commit 4d8bcc1db9a812bebcdb97b92557f3af1e00db41
+Author: leo li <2209523@xmum.edu.my>
+Date:   Sat Mar 25 16:34:04 2023 +0800
+
+    wrote a first file
+
+李坤@LAPTOP-7FRE54VI MINGW64 ~/learngit (master)
+$ git reflod
+git: 'reflod' is not a git command. See 'git --help'.
+
+The most similar command is
+        reflog
+
+李坤@LAPTOP-7FRE54VI MINGW64 ~/learngit (master)
+$ git reflog
+4346eaf (HEAD -> master) HEAD@{0}: reset: moving to 4346e
+456ac77 HEAD@{1}: reset: moving to HEAD
+456ac77 HEAD@{2}: reset: moving to HEAD^
+4346eaf (HEAD -> master) HEAD@{3}: commit: add opq
+456ac77 HEAD@{4}: commit: add jklmn
+4d8bcc1 HEAD@{5}: commit (initial): wrote a first file
+
+李坤@LAPTOP-7FRE54VI MINGW64 ~/learngit (master)
+$
+
