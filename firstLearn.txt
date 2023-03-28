@@ -214,4 +214,6 @@ $ git reflog
 
 李坤@LAPTOP-7FRE54VI MINGW64 ~/learngit (master)
 $
-sss
+$ git checkout -- firstLearn.txt
+
+xmum   nb 
