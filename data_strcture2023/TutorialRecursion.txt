@@ -1,0 +1,57 @@
+Tutorial (Recursion)
+Question 1:
+Write a recursive function to calculate the factorial of user input number.
+int fact (int n)
+Question 2:
+Write a program to create one dimensional array and do the followings:
+(a).	Call a recursive function to print the element in normal order.
+  
+void print(int arr[],int n,int i)
+{ if (i==n)
+        return;
+     cout<<arr[i]<<" ";
+        print(arr,n,i+1);
+}
+int main()
+{   int n=10;
+    int arr[]={1,2,3,4,5,6,7,8,9};
+    print(arr,n,0);
+    return 0;
+}
+
+
+(b).	Call a recursive function to print the elements in reverse order.
+   void print(int arr[],int n,int i)
+{ if (i==n)
+        return;
+     print(arr,n,i+1);
+     cout<<arr[i]<<" ";
+}
+int main()
+{   int n=10;
+    int arr[]={1,2,3,4,5,6,7,8,9};
+    print(arr,n,0);
+    return 0;
+}
+Question 3:
+Write a recursive function to calculate value of n to the power of m (nm).
+Question 4:
+The Fibonacci sequence is defined as numbers in the following integer sequence:
+0, 1, 1, 2, 3, 5, 8, 13, 21…
+Each Fibonacci number is the sum of the two preceding numbers. Mathematically, it can be defined as follows:
+F0 = 0, F1 = 1, Fn = Fn-1 + Fn-2 where n = 2, 3, 4, …
+Write a complete C++ program to calculate Fn, Fibonacci value for a given number n. Your program should:
+•	prompt user to enter a number, n.
+•	calculate the Fibonacci value, Fn using a direct recursive function.
+•	display the calculated Fibonacci value, Fn.
+
+
+Question 5:
+
+Given a mathematical formula as follows:	
+f(n) = 0	if n = 0
+f(n) = f(n-1) + 5	if n > 0
+(a)	Write a direct recursive function based on the mathematical formulae above using the function prototype below:
+int f(int n);
+(b)	Implement the above mathematical formulae using a loop.
+(c)	Write a complete C++ program to test the direct recursion and the loop that you have written in part (a) and (b). Prompt the user for n values.
