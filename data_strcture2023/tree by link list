@@ -1,0 +1,175 @@
+#include <iostream>
+
+using namespace std;
+
+#define COUNT 10 // for printing purpose
+
+class Node
+{
+public:
+
+    int key;
+    Node *left, *right;
+};
+
+// function to create a new Node
+Node *newNode(int item)
+{
+    Node *temp=new Node ;
+  // fill here
+  temp->key = item;
+  temp->right = NULL;
+  temp->left = NULL;
+    //set node key to item
+   // set left and right pointers equals to NULL
+    return temp;
+}
+
+void printPreorder(Node* node)
+{
+     // stopping condition
+         if(node == NULL)
+            return ;
+     // first print data of Node
+     // fill here
+         cout<<node->key<<"  ";
+     // then recur on left subtree
+     //fill here
+         printPreorder(node->left);
+     // now recur on right subtree
+    // fill here
+         printPreorder(node->right);
+}
+
+// A utility function to do inorder traversal of BST
+void printinorder(Node* node)
+{
+    // stopping condition
+if(node == NULL)
+            return ;
+    // fill here
+      printPreorder(node->left);
+    cout<<node->key<<"  ";
+ printPreorder(node->right);
+}
+
+
+
+void printPostorder(Node* node)
+{
+      // stopping condition
+    // fill here
+    if(node == NULL)
+            return ;
+            printPreorder(node->left);
+            printPreorder(node->right);
+            cout<<node->key<<"  ";
+}
+
+Node* insertNode(Node*node, int key)
+{
+    if (node == NULL) return newNode(key);
+    if (key < node->key)
+        node->left  = insertNode(node->left, key);
+    else if (key > node->key)
+        node->right = insertNode(node->right, key);
+    return node;
+}
+
+int findNode(Node* node, int key)
+{
+   while (node){// this while if reaches null will terminates and then return 0
+
+
+    if(key <node->key){
+        node=node->left;
+    }
+    if(key>node ->key){
+     node = node ->right;
+   }
+    else if(key == node -> key)
+        return node->key;
+   return 0;
+}
+}
+
+
+Node *MaxValueNode(Node* node)
+{
+    Node* current = node;
+     while(current->right){
+        current=current->right;
+     }
+     cout<<current->key;
+
+
+}
+
+Node * minValueNode(Node* node)
+{
+    Node* current = node;
+    while(current-> left)
+        current = current ->left;
+    cout<<current ->key;
+
+   //fill here
+
+    return current;
+}
+
+void displayTree(Node *root, int space) // for printing the tree in two dimensions
+{
+    // Base case
+    if (root == NULL)
+        return;
+
+    // Increase distance between levels
+    space += COUNT;
+
+    // Process right child first
+    displayTree(root->right, space);
+
+    // Print current node after space
+    // count
+    cout<<endl;
+    for (int i = COUNT; i < space; i++)
+        cout<<" ";
+    cout<<root->key<<endl;
+
+    // Process left child
+    displayTree(root->left, space);
+}
+
+// Driver Program to test above functions
+int main()
+{
+// 60, 40, 70,30,50, 65, 80
+    Node *root = NULL;
+    root = insertNode(root, 50);
+    insertNode(root, 30);
+    insertNode(root, 20);
+    insertNode(root, 40);
+    insertNode(root, 70);
+    insertNode(root, 60);
+    insertNode(root, 80);
+
+    displayTree(root,3);
+
+     cout<<"inorder \n"<<endl;
+    printinorder(root);
+    cout<<"postorder"<<endl;
+    printPostorder(root);
+    cout<<"preorder \n"<<endl;
+    printPreorder(root);
+    cout<<"max is"<<endl;
+    MaxValueNode(root);
+    cout<<" min is"<<endl;
+    minValueNode(root);
+
+   // search for a value in the BST
+
+    // find minimum element in the BST
+    // find maximum element in the BST
+
+    return 0;
+}
