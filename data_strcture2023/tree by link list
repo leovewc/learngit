@@ -76,6 +76,28 @@ Node* insertNode(Node*node, int key)
     return node;
 }
 
+Node* insertWithoutRecursion(Node *node,int key){
+while (node)
+    if (key < node->key){
+     if(node->left == NULL){
+       node->left = newNode(key);
+     break;
+     }
+    else
+        node=node->left;
+}
+    else if(key>node ->key){
+        if(node->right == NULL){
+            node->right =newNode(key);
+        break;
+        }
+        else
+            node = node->right;
+}
+    else if(key ==node->key)
+     break;
+}
+
 int findNode(Node* node, int key)
 {
    while (node){// this while if reaches null will terminates and then return 0
@@ -140,6 +162,46 @@ void displayTree(Node *root, int space) // for printing the tree in two dimensio
     displayTree(root->left, space);
 }
 
+void makeDeletion(Node*&nodePtr){
+    Node *tempnodePtr, *tempnodePtr2;
+    if(nodePtr->left==NULL && nodePtr->right==NULL){
+        Node *tempnodePtr==nodePtr;
+        nodePtr=NULL;
+        delete tempnodePtr;
+    }
+    else if(nodePtr->left!=NULL)
+              tempnodePtr==nodePtr;
+              nodePtr=nodePtr->left;
+              delete tempnodePtr;
+    else if(nodePtr->right!=NULL)
+              makeDeletion(nodePtr->right)
+              tempnodePtr==nodePtr;
+              nodePtr=nodePtr->right;
+              delete tempnodePtr;
+    else if(nodePtr->left1!=NULL && nodePtr->right!=NULL){
+           tempnodePtr=nodePtr->right;
+           while(tempnodePtr->left)
+                tempnodePtr=tempnodePtr->key;
+           nodePtr->key=tempnodePtr->key;
+           deleteNode(nodePtr->key, nodePtr->right);
+    }
+    
+    
+}
+
+
+
+void deleteNode(int num, Node *&nodePtr){
+  if(nodePtr){
+    if(num<nodePtr->key)
+        deleteNode(num,nodePtr->left);
+    else if(num>nodePtr->key)
+        deleteNode(num,nodePtr->right)
+    else if(num==nodePtr->key)
+        makeDeletion( Node *&nodePtr);
+}
+}
+
 // Driver Program to test above functions
 int main()
 {
@@ -152,7 +214,9 @@ int main()
     insertNode(root, 70);
     insertNode(root, 60);
     insertNode(root, 80);
-
+    insertWithoutRecursion(root,10);
+    insertWithoutRecursion(root,10);
+    insertWithoutRecursion(root,90);
     displayTree(root,3);
 
      cout<<"inorder \n"<<endl;
@@ -165,6 +229,9 @@ int main()
     MaxValueNode(root);
     cout<<" min is"<<endl;
     minValueNode(root);
+    
+    cout<<"-----------------------"<<endl;
+    
 
    // search for a value in the BST
 
