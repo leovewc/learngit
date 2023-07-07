@@ -1,0 +1,381 @@
+#include <iostream>
+
+using namespace std;
+
+#define COUNT 10
+
+class Node
+{
+public:
+
+    int key;
+    Node *left, *right;
+};
+
+// A utility function to create a new BST Node
+Node *newNode(int item)
+{
+    Node *temp=new Node ;
+    temp->key = item;
+    temp->left = temp->right = NULL;
+    return temp;
+}
+
+void printPreorder(Node* node)
+{
+     if (node == NULL)
+          return;
+
+     /* first print data of Node */
+     cout<< node->key<<endl;
+
+     /* then recur on left sutree */
+     printPreorder(node->left);
+
+     /* now recur on right subtree */
+     printPreorder(node->right);
+}
+
+// A utility function to do inorder traversal of BST
+void inorder(Node* node)
+{
+    if (node == NULL)
+          return;
+        inorder(node->left);
+       cout<< node->key<<endl;
+        inorder(node->right);
+
+}
+void printPostorder(Node* node)
+{
+     if (node == NULL)
+        return;
+
+     // first recur on left subtree
+     printPostorder(node->left);
+
+     // then recur on right subtree
+     printPostorder(node->right);
+
+     // now deal with the Node
+     cout<< node->key<<endl;
+}
+/* A utility function to insert a new Node with given key in BST */
+Node* insertNode(Node*node, int key)
+{
+    /* If the tree is empty, return a new Node */
+    if (node == NULL) return newNode(key);
+
+    /* Otherwise, recur down the tree */
+    if (key < node->key)
+        node->left  = insertNode(node->left, key);
+    else if (key > node->key)
+        node->right = insertNode(node->right, key);
+
+    /* return the (unchanged) Node pointer */
+    return node;
+}
+// write a function to insert elements without using recursion
+Node* insertNodeNormal(Node*node, int key)
+{
+    /* If the tree is empty, return a new Node */
+    if (node == NULL)
+        return newNode(key);
+
+    /* Otherwise, recur down the tree */
+     while (node){
+
+    if (key < node->key)
+        {
+            if(node->left==NULL)
+                {node->left=newNode(key);
+                  break;
+                }
+            node=node->left;
+        }
+    else if (key > node->key)
+        {
+             if(node->right==NULL)
+                {node->right=newNode(key);
+                break;
+
+                }
+            node=node->right;
+        }
+   }
+
+    /* return the (unchanged) Node pointer */
+    return node;
+}
+
+int searchNode(Node* node, int key)
+{
+   while (node){
+
+
+    if(key==node->key)
+        return 1;
+
+    if (key < node->key)
+        node=node->left;
+    else if (key > node->key)
+        node=node->right;
+
+   }
+   return 0;
+}
+
+
+//Node * MaxValueNode(Node* Node)
+//{
+//
+//};
+
+Node * minValueNode(Node* node)
+{
+    Node* current = node;
+
+    /* loop down to find the leftmost leaf */
+    while (current->left != NULL)
+        current = current->left;
+
+    return current;
+}
+
+void displayTree(Node *root, int space)
+{
+    // Base case
+    if (root == NULL)
+        return;
+
+    // Increase distance between levels
+    space += COUNT;
+
+    // Process right child first
+    displayTree(root->right, space);
+
+    // Print current node after space
+    // count
+    cout<<endl;
+    for (int i = COUNT; i < space; i++)
+        cout<<" ";
+    cout<<root->key<<endl;
+
+    // Process left child
+    displayTree(root->left, space);
+}
+
+void deleteNode(int num, Node *&nodePtr);
+
+void makeDeletion(Node *&nodePtr)
+{
+	Node *tempNodePtr, *tempNodePtr2;	// Temporary pointer, used in reattaching the left subtree.
+
+    // case 1: node with no children
+    if(nodePtr->left==NULL && nodePtr->right==NULL){
+      tempNodePtr=nodePtr;
+      nodePtr=NULL;
+      delete tempNodePtr;
+    }
+    else if(nodePtr->right==NULL){
+         tempNodePtr=nodePtr;
+        nodePtr=nodePtr->left;
+        delete tempNodePtr;
+    }
+    else if(nodePtr->left==NULL){
+        tempNodePtr=nodePtr;
+        nodePtr=nodePtr->right;
+        delete tempNodePtr;
+    }
+    else if(nodePtr->left && nodePtr->right){
+        tempNodePtr=nodePtr->right;
+        while(tempNodePtr->left)
+            tempNodePtr=tempNodePtr->left;
+        nodePtr->key=tempNodePtr->key;
+        deleteNode(nodePtr->key,nodePtr->right);
+    }
+}
+
+void deleteNode(int num, Node *&nodePtr)
+{
+// find a node with value num and call makeDeletion(nodePtr);
+    if(nodePtr){
+        if(num<nodePtr->key)
+            deleteNode(num,nodePtr->left);
+        else if(num>nodePtr->key)
+            deleteNode(num,nodePtr->right);
+        else if(num==nodePtr->key)
+            makeDeletion(nodePtr);
+
+    }
+
+}
+// utility function to calculate the height of a node
+int height(Node *temp)
+{
+    int h = 0;
+    int Max = 0;
+    if (temp != NULL)
+    {
+        //calculate the height of a node
+        int l_height =height(temp->left);
+        // fill here
+        int r_height = height(temp->right);
+
+        // recur the left sub tree
+        // recur the right sub tree
+         Max = max(l_height,r_height);
+        // select the max out of both sub trees;
+        h=Max+1;
+        // make sure to increase h by 1 every time
+
+    }
+    return h;
+}
+// utility function to calculate the difference between left and right sub tree
+int diff(Node *temp)
+{
+
+    int l_height = height (temp->left);
+    int r_height = height (temp->right);
+    int b_factor= l_height - r_height;
+    return b_factor;
+}
+/*
+o
+  o
+    o
+*/
+// left rotation
+Node *Left_rotation(Node *parent)
+{
+     cout<<"Left_rotation"<<endl;
+    // fill here
+    // create a temp node
+     Node *temp = new Node;
+    // assign right of parent to temp
+    temp = parent->right;
+    // assign left of temp to right of parent
+    parent->right = temp->left;
+    // temp left = parent
+    temp->left = parent;
+    //return temp;
+    return temp;
+}
+/*
+    o
+  o
+o
+ */
+// right rotation
+Node *Right_rotation(Node *parent)
+{
+    cout<<"Right_rotation"<<endl;
+    // fill here
+    Node *temp = new Node;
+    // create temp node
+    temp = parent->left;
+    // assign left of parent to temp
+    parent->left = temp->right;
+    // assign temp right to parent left
+   temp->right= parent;
+    // temp right= parent
+    return temp;
+   // return temp;
+}
+
+/*
+     o
+   o
+    o
+ */
+Node *lr_rotation(Node *parent)
+{
+    cout<<"lr_rotation"<<endl;
+    // fill here
+    // create temp node
+    Node *temp = new Node;
+    // assign left of parent to temp
+    temp = parent->left;
+    // parent left = left rotation of temp
+    parent->left = Left_rotation(temp);
+    return Right_rotation (parent);// double rotation
+}
+
+/*
+  o
+     o
+   o
+
+ */
+Node *rl_rotation(Node *parent)
+{
+    cout<<"rl_rotation"<<endl;
+    // fill here
+    // create temp node
+    Node *temp = new Node;
+    // assign right of parent to temp
+    temp = parent->right;
+    // parent right = right rotation of temp
+    parent->right = Right_rotation(temp);
+    return Left_rotation (parent);
+}
+
+Node *balance(Node *temp)
+{
+    int bal_factor = diff (temp);// left subtree - right subtree
+    if (bal_factor > 1) // if bal_factor more than 1:> sub tree is longer
+    {
+        // fill here
+        if(diff(temp->left) > 0){
+           temp= Right_rotation(temp);
+        }
+        else if(diff(temp->left) < 0){
+           temp= lr_rotation(temp);
+
+        }
+        // if diff of left of temp is positive then we do only right rotation
+
+        // do right rotation
+        // otherwise left then right rotations
+    }
+    else if (bal_factor < -1) // if right is longer than left and balance less than -1
+    {   if(diff(temp->right) < 0){
+           temp= Left_rotation(temp);
+        }
+        else if(diff(temp->left) > 0){
+            temp=rl_rotation(temp);
+
+        }
+
+        // fill here
+        // if diff of right of temp is positive
+        // do right then left rotation
+        // otherwise do left rotation
+    }
+    return temp;
+}
+
+
+
+int main()
+{
+
+    Node *root = NULL;
+    root = insertNode(root, 4);
+    insertNode(root, 6);
+    insertNode(root, 5);
+    displayTree(root,3);
+     cout<<"-------------------------------"<<endl;
+    root = balance (root);
+    cout<<"-------------------------------"<<endl;
+    displayTree(root,3);
+     cout<<"-------------------------------"<<endl;
+    cout<<diff(root)<<endl;
+    // print iNoder traversal of the BST
+
+//    deleteNode(40,root);
+//    displayTree(root,3);
+
+    return 0;
+}
