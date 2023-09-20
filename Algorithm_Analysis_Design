@@ -1,0 +1,85 @@
+#include<iostream>
+#include<iomanip>
+#include<vector>
+using namespace std;
+int CaculateCost(double cost1){
+    double Saver = 4.9;
+    double Standard = 6.9;
+    double Courier = 10.5;
+    double damagecost = 0.01;
+    double costL = 0.00;
+    string damage;
+    string vcode;
+    double ShippingFee = Saver + Standard + Courier;
+    costL = ShippingFee + cost1;
+    cout<<"if it need damage protection or not :"<<endl;
+    cin>>damage;
+    while(1){
+         if(damage == "1" || damage =="0"){
+            costL =costL *(1+damagecost);
+            break;
+         }
+
+    else{
+        cout<<"wrong,please try again";
+        cin>>damage;
+    }
+    }
+    cout<<"please enter voncher code if you have"<<endl;
+    cin>>vcode;
+    while(vcode != "0")
+    {
+      if(vcode == "0909CARNIVAL" )
+      {  if(cost1 >= 50)
+            costL = costL *(0.95);
+         else
+            cout<<"the cost is not enough"<<endl;
+            break;
+      }
+      else if(vcode == "AUTUMNISHERE")
+      {
+         if(cost1 >= 150)
+            costL = costL -15;
+         else
+            cout<<"the cost is not enough"<<endl;
+            break;
+      }
+      else if(vcode == "FREESHIPPING")
+      {
+          if(cost1 >= 300)
+            costL = cost1;
+         else
+            cout<<"the cost is not enough"<<endl;
+            break;
+      }
+       else{
+        cout<<"the voucher code is incorrect,please try again or use 0 to quit"<<endl;
+       cin>>vcode;
+       }
+
+    }
+    return costL;
+}
+int main()
+{  vector<double> cost ;
+   double cost1;
+    int i =1;
+    cout<<"please enter cost  :"<<endl;
+    cin>>cost[0];
+   while (cost1){
+    cin>>cost[i];
+    i++;
+   }
+    while(cost[i] )
+    {
+        cost1 += cost[i];
+    }
+    bool damage;
+
+    string vcode;
+
+   double costL = CaculateCost(cost1);
+    cout<<"subtotal cost of your item before:"<<fixed<<setprecision(2)<<cost1<<endl;
+    cout<<"subtotal cost of your item after:"<<fixed<<setprecision(2)<<costL;
+    return 0;
+}
