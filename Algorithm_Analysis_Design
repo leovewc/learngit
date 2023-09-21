@@ -83,3 +83,4 @@ int main()
     cout<<"subtotal cost of your item after:"<<fixed<<setprecision(2)<<costL;
     return 0;
 }
+https://www.w3schools.com/mysql/mysql_orderby.asp
