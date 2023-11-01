@@ -1,0 +1,66 @@
+#include<iostream>
+#include<vector>
+#include<algorithm>
+using namespace std;
+struct Class{
+    int start_time;
+    int end_time;
+    char id;
+};
+bool compare_interval(const Class &a, const Class &b){
+    return(a.end_time - a.start_time)<(b.end_time - b.start_time);
+}
+vector<Class> Scheduling_by_shortest_interval(vector<Class> a){
+    sort(a.begin() , a.end(), compare_interval);
+vector<Class> result;
+    int endtime = -1;
+    for(vector<Class>:: const_iterator it = a.begin();it!=a.end();it++){
+            const Class &b = *it;
+        if(b.start_time >=endtime){
+            result.push_back(b);
+            endtime = b.end_time;
+        }
+
+    }return result;
+}
+bool compare_conflict(const Class &a, const Class &b){
+      return!((b.start_time<a.start_time&&b.start_time >a.end_time)||(b.end_time>a.end_time&&b.end_time<a.start_time));
+}
+vector<Class> Scheduling_by_fewest_conflicts(vector<Class> a){
+    sort(a.begin(),a.end(),compare_conflict);
+    vector<Class> result;
+    int endtime =-1;
+    for(vector<Class>::const_iterator it = a.begin();it!=a.end();it++){
+        const Class &b = *it;
+        if(b.start_time>=endtime){
+            result.push_back(b);
+            endtime = b.end_time;
+        }
+    }return result;
+}
+int main(){
+    vector<Class> classes,result;
+    int a,b;
+    char id;
+
+   for(int i =0;i<4;i++){
+Class clas;
+    cout<<"enter class";
+        cin>>a>>b>>id;
+
+        clas.start_time = a;
+        clas.end_time = b;
+        clas.id = id;
+        classes.push_back(clas);
+    }
+    result = Scheduling_by_shortest_interval(classes);
+    //result = Scheduling_by_fewest_conflicts(classes);
+    cout<<endl<<"the result is: "<<endl;
+    for(vector<Class>::const_iterator it = result.begin();it != result.end();it++){
+       const Class &clas = *it;
+        cout<<clas.id<<"  ";
+    }
+  return 0;
+
+
+}
